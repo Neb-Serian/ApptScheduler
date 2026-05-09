@@ -56,10 +56,6 @@ public final class AppointmentService {
         return sorted(repository.findByDateRange(start, end));
     }
 
-    /**
-     * Appointments in the given calendar week, but only on or after {@code todayInclusive}
-     * (so past days in the same week are omitted).
-     */
     public List<Appointment> getUpcomingForWeek(LocalDate anyDayInWeek, LocalDate todayInclusive) {
         Objects.requireNonNull(anyDayInWeek, "anyDayInWeek");
         Objects.requireNonNull(todayInclusive, "todayInclusive");
@@ -69,9 +65,6 @@ public final class AppointmentService {
         return sorted(filterFromDate(repository.findByDateRange(effStart, weekEnd), todayInclusive));
     }
 
-    /**
-     * All appointments on or after today (inclusive).
-     */
     public List<Appointment> getFromTodayOnwards(LocalDate todayInclusive) {
         Objects.requireNonNull(todayInclusive, "todayInclusive");
         LocalDate farEnd = todayInclusive.plusYears(50);
@@ -80,7 +73,7 @@ public final class AppointmentService {
 
     public static LocalDate startOfWeek(LocalDate d) {
         DayOfWeek dow = d.getDayOfWeek();
-        int shift = (dow.getValue() + 6) % 7; // Monday=0
+        int shift = (dow.getValue() + 6) % 7;
         return d.minusDays(shift);
     }
 
@@ -96,7 +89,6 @@ public final class AppointmentService {
     }
 
     private void ensureNoConflict(Appointment candidate, UUID ignoreAppointmentId) {
-        // No past appointments (date in past, or earlier today).
         LocalDate today = LocalDate.now();
         if (candidate.getDate().isBefore(today)) {
             throw new IllegalArgumentException("Appointment date cannot be in the past");
@@ -105,7 +97,6 @@ public final class AppointmentService {
             throw new IllegalArgumentException("Appointment start time cannot be in the past");
         }
 
-        // Conflict checking: no overlapping appointments on the same date, for any client.
         List<Appointment> existing = repository.findAll();
         for (Appointment other : existing) {
             if (ignoreAppointmentId != null && ignoreAppointmentId.equals(other.getId())) {

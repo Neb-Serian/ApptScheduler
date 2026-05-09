@@ -2,7 +2,7 @@
   <configuration default="false" name="Main" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="Main" />
     <module name="ApptScheduler" />
-    <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\14084\IdeaProjects\javafx-sdk-21.0.10\lib&quot; --add-modules javafx.controls,javafx.graphics" />
+    <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\14084\IdeaProjects\javafx-sdk-21.0.10\lib&quot; --add-modules javafx.controls " />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

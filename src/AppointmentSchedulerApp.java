@@ -1,5 +1,4 @@
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -32,9 +31,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-/**
- * JavaFX application for managing clients and appointments.
- */
 public class AppointmentSchedulerApp extends Application {
 
     private static final double WELCOME_SIZE = 26;
@@ -672,10 +668,6 @@ public class AppointmentSchedulerApp extends Application {
             alert.initOwner(primaryStage);
             alert.showAndWait();
         }
-    }
-
-    private static String nullToEmpty(String value) {
-        return value == null ? "" : value;
     }
 
     private VBox buildLandingPane() {

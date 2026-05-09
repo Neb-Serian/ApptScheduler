@@ -2,11 +2,6 @@ import java.util.Objects;
 import java.util.UUID;
 import java.time.LocalDate;
 
-/**
- * Domain model for a client.
- *
- * Encapsulation: fields are private and validated at construction time.
- */
 public final class Client {
 
     public enum Gender {
@@ -123,7 +118,6 @@ public final class Client {
     }
 
     private static boolean looksLikeUsPhone(String value) {
-        // Strict on purpose: forces consistent formatting and simplifies later search/display.
         return value.matches("\\d{3}-\\d{3}-\\d{4}");
     }
 
